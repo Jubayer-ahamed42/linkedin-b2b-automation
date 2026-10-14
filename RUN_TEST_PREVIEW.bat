@@ -4,6 +4,10 @@ echo ========================================================
 echo  🚀 LinkedIn B2B Auto-Poster Preview Generator
 echo ========================================================
 echo.
-.venv\Scripts\python.exe main.py --dry-run
+if exist ".venv\Scripts\python.exe" (
+    ".venv\Scripts\python.exe" main.py --dry-run
+) else (
+    python main.py --dry-run
+)
 echo.
 pause

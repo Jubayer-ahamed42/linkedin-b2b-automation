@@ -4,6 +4,10 @@ echo ========================================================
 echo  🔑 LinkedIn 1-Click OAuth Setup Assistant
 echo ========================================================
 echo.
-.venv\Scripts\python.exe setup_linkedin_auth.py
+if exist ".venv\Scripts\python.exe" (
+    ".venv\Scripts\python.exe" setup_linkedin_auth.py
+) else (
+    python setup_linkedin_auth.py
+)
 echo.
 pause
