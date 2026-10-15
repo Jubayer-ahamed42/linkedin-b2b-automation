@@ -2,8 +2,12 @@ name: LinkedIn B2B Autonomous Client-Acquisition Poster
 
 on:
   schedule:
-    # 9:30 AM BST (Bangladesh Time) = 03:30 UTC
+    # ১. প্রাইমারি ক্লাউড রান: সকাল ৯:৩০ BST (03:30 UTC)
     - cron: '30 3 * * *'
+    # ২. ক্লাউড ব্যাকআপ ১: সকাল ৯:৪৫ BST (03:45 UTC) - যদি ৯:৩০ সার্ভার কিউতে সামান্য আটকে যায়
+    - cron: '45 3 * * *'
+    # ৩. ক্লাউড ব্যাকআপ ২: সকাল ১০:০০ BST (04:00 UTC) - সর্বোচ্চ ক্লাউড সুরক্ষা ফেইলওভার
+    - cron: '0 4 * * *'
 
   # এক্সটার্নাল ক্লাউড পিং বা ওয়েবহুক ট্রিগার
   repository_dispatch:
