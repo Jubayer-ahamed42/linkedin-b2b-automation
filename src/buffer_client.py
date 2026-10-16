@@ -59,10 +59,17 @@ class BufferClient:
         logger.info(f"✅ Buffer LinkedIn Channel Verified: {channel_info.get('name')} ({channel_info.get('service')})")
         return channel_info
 
-    def publish_post(self, text: str, image_url: Optional[str] = None, mode: str = "shareNow") -> str:
+    def publish_post(
+        self,
+        text: str,
+        image_url: Optional[str] = None,
+        mode: str = "shareNow",
+        due_at: Optional[str] = None
+    ) -> str:
         """
-        Publishes a post via Buffer to LinkedIn.
+        Publishes or schedules a post via Buffer to LinkedIn.
         - mode='shareNow' publishes immediately.
+        - mode='customScheduled' schedules for exact due_at (ISO 8601 UTC string).
         - mode='addToQueue' adds to the queue.
         Returns the post ID.
         """
@@ -76,6 +83,7 @@ class BufferClient:
                     post {
                         id
                         status
+                        dueAt
                     }
                 }
                 ... on MutationError {
@@ -91,6 +99,9 @@ class BufferClient:
             "schedulingType": "automatic",
             "mode": mode
         }
+
+        if due_at and mode == "customScheduled":
+            input_data["dueAt"] = due_at
 
         if image_url:
             input_data["assets"] = [{"image": {"url": image_url}}]

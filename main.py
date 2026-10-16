@@ -2,6 +2,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+import pytz
 
 # Ensure UTF-8 output on Windows terminal
 if sys.platform == "win32":
@@ -106,11 +107,28 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
 
     # 7. Publish to LinkedIn (via Buffer Official Partner or Direct REST API)
     if BUFFER_API_KEY and BUFFER_CHANNEL_ID:
-        logger.info("🚀 Buffer Official Partner API দিয়ে সরাসরি LinkedIn পার্সোনাল প্রোফাইলে পোস্ট পাঠানো হচ্ছে...")
         buf_client = BufferClient(api_key=BUFFER_API_KEY, channel_id=BUFFER_CHANNEL_ID)
+
+        # Smart Timing Engine:
+        # If script runs BEFORE 09:25 AM BST on that day, pre-schedule in Buffer for exactly 09:30:00 AM BST (03:30 UTC).
+        # Buffer's enterprise servers will publish it at 09:30:00 AM sharp with zero latency.
+        # If script runs AT or AFTER 09:25 AM BST, publish immediately.
+        target_post_time_bst = now_bst.replace(hour=9, minute=30, second=0, microsecond=0)
+        if now_bst < target_post_time_bst.replace(minute=25):
+            due_at = target_post_time_bst.astimezone(pytz.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+            post_mode = "customScheduled"
+            logger.info(f"⏰ স্মার্ট প্রি-শিডিউল মোড সক্রিয়: পোস্টটি বাফারে আজ সকাল ০৯:৩০ BST ({due_at})-এর জন্য শিডিউল করা হচ্ছে...")
+        else:
+            due_at = None
+            post_mode = "shareNow"
+            logger.info("⚡ ইনস্ট্যান্ট পাবলিশ মোড সক্রিয়: পোস্টটি এখনই বাফারের মাধ্যমে সরাসরি লাইভ করা হচ্ছে...")
+
         try:
-            post_id = buf_client.publish_post(text=content, mode="shareNow")
-            logger.info(f"🎉 পোস্ট সফলভাবে লিঙ্কডইনে প্রকাশিত হয়েছে! Buffer Post ID: {post_id}")
+            post_id = buf_client.publish_post(text=content, mode=post_mode, due_at=due_at)
+            if post_mode == "customScheduled":
+                logger.info(f"🎉 পোস্ট সফলভাবে বাফারে শিডিউল হয়েছে! নির্ধারিত ০৯:৩০ BST-তে বাফার সরাসরি লিঙ্কডইনে পাবলিশ করবে। Post ID: {post_id}")
+            else:
+                logger.info(f"🎉 পোস্ট সফলভাবে লিঙ্কডইনে প্রকাশিত হয়েছে! Buffer Post ID: {post_id}")
 
             # Record to History
             history_mgr.record_post(
@@ -120,9 +138,9 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
                 post_urn=str(post_id),
                 card_path=str(card_path) if card_path else ""
             )
-            logger.info("💾 হিস্ট্রি আপডেট সম্পন্ন। আগামীকাল নতুন বিষয় ও কেস স্টাডি নিয়ে পোস্ট হবে।")
+            logger.info("💾 হিস্ট্রি আপডেট সম্পন্ন। পরবর্তী শিডিউলে নতুন বিষয় ও কেস স্টাডি নিয়ে পোস্ট হবে।")
         except Exception as e:
-            logger.error(f"❌ বাফারের মাধ্যমে পোস্ট প্রকাশ করতে ব্যর্থ: {e}")
+            logger.error(f"❌ বাফারের মাধ্যমে পোস্ট সম্পন্ন করতে ব্যর্থ: {e}")
             sys.exit(1)
     else:
         logger.info("🚀 LinkedIn Official REST API দিয়ে প্রোফাইলে পোস্ট পাঠানো হচ্ছে...")
