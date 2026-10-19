@@ -44,9 +44,9 @@ B2B_THEMES = {
         "category": "E-COMMERCE AUTOMATION",
         "target_audience": "E-Commerce Founders, F-Commerce Page Owners, Retail Brands",
         "pain_point": "Customers message at midnight or on holidays, wait 30 minutes, get frustrated, and buy from competitors.",
-        "solution": "An intelligent 24/7 AI Sales Agent that politely answers questions in natural Bengali, recommends products, takes orders, and logs customer address directly.",
+        "solution": "An intelligent 24/7 AI Sales Agent that politely answers inquiries in natural human tone, recommends relevant products, answers FAQs, and logs orders autonomously.",
         "case_study_angle": "How an online brand recovered 40% of abandoned nighttime inquiries with a zero-delay AI closer.",
-        "hashtags": ["#AIAutomation", "#EcommerceGrowth", "#ChatbotMarketing", "#BusinessAutomation", "#BeSmartWithAI", "#BangladeshBusiness"]
+        "hashtags": ["#AIAutomation", "#EcommerceGrowth", "#ChatbotMarketing", "#BusinessAutomation", "#BeSmartWithAI", "#SalesPipeline"]
     },
     1: {  # Tuesday
         "theme_id": "whatsapp_crm_lead_capture",
@@ -56,7 +56,7 @@ B2B_THEMES = {
         "pain_point": "Hot leads get lost in endless Messenger/WhatsApp chats; follow-ups are forgotten or delayed by days.",
         "solution": "Automated workflow that captures customer details in 3 seconds, syncs them to Google Sheets/CRM, and notifies the team on Telegram/WhatsApp immediately.",
         "case_study_angle": "Never lose a high-ticket client again: The 3-second lead qualification pipeline.",
-        "hashtags": ["#LeadGeneration", "#CRMAutomation", "#WorkflowOptimization", "#SalesPipeline", "#B2BGrowth", "#BanglaTech"]
+        "hashtags": ["#LeadGeneration", "#CRMAutomation", "#WorkflowOptimization", "#SalesPipeline", "#B2BGrowth", "#RevOps"]
     },
     2: {  # Wednesday
         "theme_id": "customer_support_cost_reduction",

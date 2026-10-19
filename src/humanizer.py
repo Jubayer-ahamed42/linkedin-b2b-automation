@@ -28,8 +28,10 @@ FORENSIC_PATTERNS = [
 REVEAL_BRIDGES = [
     (r"(?im)^The (result|outcome|lesson|catch|truth|kicker)\?\s*", ""),
     (r"(?im)^Plot twist:\s*", ""),
-    (r"(?im)^Here'?s (the thing|what happened|the secret|the takeaway)[:.]\s*", ""),
+    (r"(?im)^Here'?s (the thing|what happened|the secret|the takeaway|why)[:.]\s*", ""),
     (r"(?im)^The takeaway\?\s*", ""),
+    (r"(?im)^Why does this matter\?\s*", ""),
+    (r"(?im)^Let that sink in\.?\s*", ""),
 ]
 
 # 2026 High-frequency AI vocabulary and preferred natural alternatives
@@ -52,6 +54,17 @@ AI_VOCAB_MAPPINGS = {
     r"\bfoster(s|ed|ing)?\b": "build",
     r"\btestament to\b": "proof of",
     r"\blet that sink in\b": "",
+    r"\bcrucial\b": "key",
+    r"\bsignificant(ly)?\b": "major",
+    r"\blandscape\b": "industry",
+    r"\belevat(e|es|ed|ing)\b": "improve",
+    r"\bempower(s|ed|ing)?\b": "enable",
+    r"\becosystem\b": "system",
+    r"\bnuanced\b": "detailed",
+    r"\bcomprehensive\b": "thorough",
+    r"\binsights\b": "takeaways",
+    r"\bdive deep\b": "take a closer look",
+    r"\bin today's fast[- ]paced (digital )?world\b": "today",
 }
 
 class LinkedInHumanizer:

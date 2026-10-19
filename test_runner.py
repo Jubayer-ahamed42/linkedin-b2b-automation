@@ -50,7 +50,7 @@ def test_card_renderer():
     print("🧪 [Test 3] Testing B2B Executive Infographic Card Composition...")
     cr = LinkedInCardRenderer()
     card_path = cr.render_b2b_card(
-        headline="ম্যানুয়াল রিপ্লাই বন্ধ করুন: যেভাবে এআই ২৪ ঘণ্টা সেলস আনে",
+        headline="Stop Answering FAQs Manually: How AI Closes Deals 24/7",
         category="E-COMMERCE AUTOMATION",
         metric="80% Cost Cut • 3-Sec Response Time",
         output_path=TEMP_DIR / "test_linkedin_card.jpg"

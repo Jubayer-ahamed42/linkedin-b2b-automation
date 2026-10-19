@@ -51,11 +51,17 @@ class LinkedInCardRenderer:
         draw.line([(margin, margin), (width - margin, margin)], fill=(14, 165, 233), width=6)
 
         # 3. Load Fonts
-        title_font = ImageFont.truetype(str(self.font_bengali_path), 48) if self.font_bengali_path.exists() else None
+        title_font = (
+            ImageFont.truetype(str(self.font_english_path), 48) if self.font_english_path.exists()
+            else (ImageFont.truetype(str(self.font_bengali_path), 48) if self.font_bengali_path.exists() else None)
+        )
         badge_font = ImageFont.truetype(str(self.font_english_path), 22) if self.font_english_path.exists() else None
         metric_font = ImageFont.truetype(str(self.font_english_path), 24) if self.font_english_path.exists() else None
         brand_font = ImageFont.truetype(str(self.font_english_path), 22) if self.font_english_path.exists() else None
-        sub_font = ImageFont.truetype(str(self.font_bengali_path), 28) if self.font_bengali_path.exists() else None
+        sub_font = (
+            ImageFont.truetype(str(self.font_english_path), 26) if self.font_english_path.exists()
+            else (ImageFont.truetype(str(self.font_bengali_path), 26) if self.font_bengali_path.exists() else None)
+        )
 
         # 4. Top Header Meta: Brand Identity (Left)
         brand_box = [(margin + 35, margin + 35), (margin + 380, margin + 110)]
@@ -92,7 +98,7 @@ class LinkedInCardRenderer:
         curr_line = []
         for word in words:
             curr_line.append(word)
-            if len(" ".join(curr_line)) > 26:
+            if len(" ".join(curr_line)) > 30:
                 lines.append(" ".join(curr_line))
                 curr_line = []
         if curr_line:
@@ -107,8 +113,8 @@ class LinkedInCardRenderer:
             draw.text((width//2, y_text), line, fill=(248, 250, 252), anchor="mm", font=title_font)
             y_text += 80
 
-        # Sub-explainer note
-        draw.text((width//2, y_text + 30), "আপনার ব্যবসাকে স্বয়ংক্রিয় করে সময় বাঁচান এবং সেলস বাড়ান", fill=(148, 163, 184), anchor="mm", font=sub_font)
+        # Sub-explainer note (Executive English)
+        draw.text((width//2, y_text + 30), "Automate repetitive workflows, save founder hours & scale revenue", fill=(148, 163, 184), anchor="mm", font=sub_font)
 
         # 7. Metric / ROI Ribbon (Bottom Center)
         metric_box = [(margin + 60, height - 260), (width - margin - 60, height - 175)]
@@ -116,7 +122,7 @@ class LinkedInCardRenderer:
         draw.text((width//2, height - 218), f"🎯  {metric}  🎯", fill=(52, 211, 153), anchor="mm", font=metric_font)
 
         # 8. Bottom Footer (Official Contact & Authority)
-        draw.text((width//2, height - margin - 45), "Be Smart With AI • Free Business Process Audit: wa.me/8801610594042", fill=(148, 163, 184), anchor="mm", font=brand_font)
+        draw.text((width//2, height - margin - 45), "Be Smart With AI • Free Systems Audit: wa.me/8801610594042", fill=(148, 163, 184), anchor="mm", font=brand_font)
 
         # Save JPEG
         img.save(target_path, "JPEG", quality=95)
