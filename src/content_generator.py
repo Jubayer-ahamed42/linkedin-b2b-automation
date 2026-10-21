@@ -40,7 +40,7 @@ class LinkedInContentGenerator:
         pain = theme_data["pain_point"]
         solution = theme_data["solution"]
         case_angle = theme_data["case_study_angle"]
-        hashtags = " ".join(theme_data["hashtags"])
+        hashtags = " ".join(theme_data["hashtags"][:2])
         current_year = get_current_bst_time().year
 
         prompt = f"""
@@ -90,7 +90,7 @@ Your objective: Write an exceptional, high-converting, deeply human LinkedIn pos
      "If you want to identify where manual data entry and repetitive tasks are creating bottlenecks in your business, message me directly on WhatsApp for a complimentary 15-minute workflow audit:
      👉 {OFFICIAL_WHATSAPP_LINK}"
 
-6. 🏷️ 4-5 High-Value Global B2B Hashtags: {hashtags}
+6. 🏷️ STRICT MAXIMUM 2 HASHTAGS: Include strictly maximum 1 to 2 ultra-relevant hashtags at the very bottom (e.g., {hashtags}). UNDER NO CIRCUMSTANCES include more than 2 hashtags. Never place hashtags inside body sentences.
 
 【REQUIRED OUTPUT FORMAT】:
 Output strictly a valid JSON object with NO surrounding markdown commentary:
@@ -204,7 +204,7 @@ Output strictly a valid JSON object with NO surrounding markdown commentary:
         theme_name = theme_data["name"]
         pain = theme_data["pain_point"]
         solution = theme_data["solution"]
-        hashtags = " ".join(theme_data["hashtags"])
+        hashtags = " ".join(theme_data["hashtags"][:2])
 
         title = f"⚡ {theme_name}: Eliminating Operational Bottlenecks"
         content = f"""{title}

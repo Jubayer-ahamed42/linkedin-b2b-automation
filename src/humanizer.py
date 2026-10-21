@@ -1,7 +1,7 @@
 """
 LinkedIn Humanizer V3 Engine
 Implements anti-AI detection, vocabulary density scoring, reveal-bridge scrubbing,
-em-dash calibration, and tone humanization based on 2026 stylometry research.
+em-dash calibration, hashtag limiting, and tone humanization based on 2026 stylometry research.
 """
 
 import re
@@ -106,6 +106,23 @@ class LinkedInHumanizer:
                 result.append(sep + part.lstrip())
         return "".join(result)
 
+    def calibrate_hashtags(self, text: str, max_allowed: int = 2) -> str:
+        """
+        Enforces strict limit of maximum 2 hashtags per post.
+        Excess hashtags beyond max_allowed are automatically stripped to protect algorithmic reach.
+        """
+        hashtags = re.findall(r"#[\w\u0980-\u09FF]+", text)
+        if len(hashtags) <= max_allowed:
+            return text
+
+        excess_tags = hashtags[max_allowed:]
+        for tag in excess_tags:
+            text = re.sub(rf"{re.escape(tag)}\b", "", text)
+
+        # Clean up any leftover empty lines or double spaces
+        paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
+        return "\n\n".join(paragraphs)
+
     def normalize_punctuation(self, text: str) -> str:
         """Normalizes curly quotes, double hyphens, and whitespace."""
         text = text.replace("“", '"').replace("”", '"')
@@ -140,6 +157,7 @@ class LinkedInHumanizer:
         text = self.normalize_punctuation(text)
         text, vocab_cleaned = self.scrub_ai_vocabulary(text)
         text = self.calibrate_em_dashes(text)
+        text = self.calibrate_hashtags(text, max_allowed=2)
         text = self.format_spacing(text)
 
         # Audit indicators

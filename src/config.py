@@ -46,7 +46,7 @@ B2B_THEMES = {
         "pain_point": "Customers message at midnight or on holidays, wait 30 minutes, get frustrated, and buy from competitors.",
         "solution": "An intelligent 24/7 AI Sales Agent that politely answers inquiries in natural human tone, recommends relevant products, answers FAQs, and logs orders autonomously.",
         "case_study_angle": "How an online brand recovered 40% of abandoned nighttime inquiries with a zero-delay AI closer.",
-        "hashtags": ["#AIAutomation", "#EcommerceGrowth", "#ChatbotMarketing", "#BusinessAutomation", "#BeSmartWithAI", "#SalesPipeline"]
+        "hashtags": ["#AIAutomation", "#EcommerceGrowth"]
     },
     1: {  # Tuesday
         "theme_id": "whatsapp_crm_lead_capture",
@@ -56,7 +56,7 @@ B2B_THEMES = {
         "pain_point": "Hot leads get lost in endless Messenger/WhatsApp chats; follow-ups are forgotten or delayed by days.",
         "solution": "Automated workflow that captures customer details in 3 seconds, syncs them to Google Sheets/CRM, and notifies the team on Telegram/WhatsApp immediately.",
         "case_study_angle": "Never lose a high-ticket client again: The 3-second lead qualification pipeline.",
-        "hashtags": ["#LeadGeneration", "#CRMAutomation", "#WorkflowOptimization", "#SalesPipeline", "#B2BGrowth", "#RevOps"]
+        "hashtags": ["#LeadGeneration", "#CRMAutomation"]
     },
     2: {  # Wednesday
         "theme_id": "customer_support_cost_reduction",
@@ -66,7 +66,7 @@ B2B_THEMES = {
         "pain_point": "Support reps answering the exact same 15 questions 200 times a day; high salary costs and staff burnout.",
         "solution": "Automating 80% of repetitive Tier-1 queries instantly with a trained AI knowledge assistant, letting humans handle only high-value issues.",
         "case_study_angle": "Cutting response time from 18 minutes to 4 seconds while saving 60+ man-hours weekly.",
-        "hashtags": ["#CustomerService", "#CostReduction", "#OperationalExcellence", "#AIAgents", "#ProductivityHacks"]
+        "hashtags": ["#CustomerSupport", "#CostReduction"]
     },
     3: {  # Thursday
         "theme_id": "invoicing_payment_order_workflows",
@@ -76,7 +76,7 @@ B2B_THEMES = {
         "pain_point": "Manual invoice creation in Excel, manual payment checking, and delayed receipts causing cashflow slowdowns.",
         "solution": "1-Click automated order-to-invoice engine: payment detected -> PDF generated -> sent via WhatsApp & Email in 5 seconds.",
         "case_study_angle": "How automated billing eliminates bookkeeping errors and accelerates client payments.",
-        "hashtags": ["#Invoicing", "#AccountingTech", "#ProcessAutomation", "#SmartWorkflows", "#Fintech"]
+        "hashtags": ["#InvoicingTech", "#ProcessAutomation"]
     },
     4: {  # Friday
         "theme_id": "booking_qualification_engine",
@@ -86,7 +86,7 @@ B2B_THEMES = {
         "pain_point": "Hours wasted back-and-forth asking 'When are you free?', dealing with no-shows, and talking to unqualified tire-kickers.",
         "solution": "Automated qualification bot that filters serious clients first, books calendar slots, takes deposit info, and sends automated reminder SMS/WhatsApp.",
         "case_study_angle": "Eliminating no-shows by 75% using multi-channel automated calendar reminders.",
-        "hashtags": ["#AppointmentBooking", "#ClientQualification", "#ConsultancyTech", "#BusinessScale", "#AutomationTools"]
+        "hashtags": ["#AppointmentBooking", "#BusinessAutomation"]
     },
     5: {  # Saturday
         "theme_id": "cold_lead_reactivation",
@@ -96,7 +96,7 @@ B2B_THEMES = {
         "pain_point": "Thousands of past leads sitting completely forgotten in spreadsheets that cost money to acquire.",
         "solution": "Automated re-engagement sequences that reach out with personalized, non-spammy offers to revive dormant prospects into fresh paying clients.",
         "case_study_angle": "Generating $2,500+ in sales from a 'dead' contact list in 48 hours without spending on new ads.",
-        "hashtags": ["#LeadReactivation", "#SalesStrategy", "#CustomerRetention", "#RevenueGrowth", "#MarketingAutomation"]
+        "hashtags": ["#LeadReactivation", "#SalesGrowth"]
     },
     6: {  # Sunday
         "theme_id": "founder_systems_over_sweat",
@@ -106,7 +106,7 @@ B2B_THEMES = {
         "pain_point": "Founder is trapped 14 hours a day micromanaging small repetitive tasks; cannot take a day off without business stopping.",
         "solution": "Transforming chaotic manual tasks into autonomous digital standard operating procedures (SOPs) powered by code and AI.",
         "case_study_angle": "The difference between owning a job vs owning an automated self-running business system.",
-        "hashtags": ["#Entrepreneurship", "#FounderLife", "#SystemsOverHustle", "#BusinessMindset", "#ScalingUp"]
+        "hashtags": ["#BusinessSystems", "#FounderLife"]
     }
 }
 

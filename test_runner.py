@@ -19,8 +19,9 @@ def test_config():
     theme = determine_today_theme()
     print(f"  Today's Theme: {theme['name']} ({theme['category']})")
     assert len(B2B_THEMES) == 7, "Must have exactly 7 daily themes"
-    assert "https://wa.me/8801610594042" in theme["solution"] or True
-    print("  [OK] Theme and Schedule verified!\n")
+    for day, data in B2B_THEMES.items():
+        assert len(data.get("hashtags", [])) <= 2, f"Day {day} has more than 2 hashtags!"
+    print("  [OK] Theme and Schedule verified (Strict max 2 hashtags per theme)!\n")
 
 def test_history():
     print("🧪 [Test 2] Testing History Manager & Deduplication...")
@@ -66,7 +67,8 @@ def test_humanizer():
         'In today’s fast-paced digital world, companies must delve into AI.\n'
         'The result?\n'
         'A revolutionary game-changer that will streamline and foster seamless growth — forever — guaranteed — without fail.\n'
-        'Furthermore, it is important to note that automation matters.'
+        'Furthermore, it is important to note that automation matters.\n\n'
+        '#AIAutomation #B2BGrowth #LeadGen #Workflow #Scale #Productivity'
     )
     result = humanize_linkedin_post(sample_ai_text)
     cleaned = result["humanized_text"]
@@ -74,8 +76,10 @@ def test_humanizer():
     assert "The result?" not in cleaned, "Failed to scrub reveal bridge"
     assert "game-changer" not in cleaned.lower(), "Failed to scrub 'game-changer'"
     assert cleaned.count("—") <= 2, "Failed to cap em-dashes"
+    assert cleaned.count("#") == 2, f"Failed to strictly cap hashtags at max 2! Found: {cleaned.count('#')}"
     assert result["is_humanized"] is True
     print(f"  [OK] Sanitized {len(result['vocab_cleaned'])} AI markers successfully!")
+    print("  [OK] Strictly capped hashtags at maximum 2!")
     print("  [OK] LinkedIn Humanizer passed!\n")
 
 def test_gemini_content():
@@ -87,9 +91,12 @@ def test_gemini_content():
     theme = determine_today_theme()
     post_data = gen.generate_post(theme_data=theme, recent_history_summary="")
     assert post_data.get("headline"), "Headline missing!"
-    assert post_data.get("content"), "Content missing!"
+    content = post_data.get("content", "")
+    assert content, "Content missing!"
+    tag_count = content.count("#")
+    assert tag_count <= 2, f"Generated content exceeded 2 hashtags! Found: {tag_count}"
     print(f"  [OK] Generated Headline: {post_data.get('headline')}")
-    print(f"  [OK] Content Length: {len(post_data.get('content'))} characters\n")
+    print(f"  [OK] Content Length: {len(content)} characters (Hashtag count: {tag_count})\n")
 
 def main():
     print("=" * 65)
