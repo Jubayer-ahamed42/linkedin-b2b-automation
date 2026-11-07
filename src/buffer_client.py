@@ -56,7 +56,7 @@ class BufferClient:
         if not channel_info:
             raise RuntimeError("Buffer Channel তথ্য পাওয়া যায়নি!")
 
-        logger.info(f"✅ Buffer LinkedIn Channel Verified: {channel_info.get('name')} ({channel_info.get('service')})")
+        logger.info(f"[OK] Buffer LinkedIn Channel Verified: {channel_info.get('name')} ({channel_info.get('service')})")
         return channel_info
 
     def publish_post(
@@ -125,5 +125,5 @@ class BufferClient:
 
         post = create_post_data.get("post", {})
         post_id = post.get("id", "buffer_published")
-        logger.info(f"🎉 Buffer Post Published Successfully! Post ID: {post_id}")
+        logger.info(f" Buffer Post Published Successfully! Post ID: {post_id}")
         return str(post_id)

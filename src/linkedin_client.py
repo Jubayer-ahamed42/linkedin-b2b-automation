@@ -40,7 +40,7 @@ class LinkedInClient:
                 sub = data.get("sub")
                 name = data.get("name") or f"{data.get('given_name', '')} {data.get('family_name', '')}".strip()
                 self.person_urn = f"urn:li:person:{sub}"
-                logger.info(f"✅ LinkedIn OpenID Verified: {name} (URN: {self.person_urn})")
+                logger.info(f"[OK] LinkedIn OpenID Verified: {name} (URN: {self.person_urn})")
                 return {"name": name, "person_urn": self.person_urn, "email": data.get("email")}
         except Exception as e:
             logger.debug(f"OpenID userinfo check error: {e}")
@@ -56,7 +56,7 @@ class LinkedInClient:
                 last = data.get("localizedLastName", "")
                 name = f"{first} {last}".strip()
                 self.person_urn = f"urn:li:person:{person_id}"
-                logger.info(f"✅ LinkedIn Legacy Verified: {name} (URN: {self.person_urn})")
+                logger.info(f"[OK] LinkedIn Legacy Verified: {name} (URN: {self.person_urn})")
                 return {"name": name, "person_urn": self.person_urn}
             else:
                 err = r.json() if "application/json" in r.headers.get("Content-Type", "") else r.text
@@ -127,7 +127,7 @@ class LinkedInClient:
         if upload_res.status_code not in [200, 201]:
             raise RuntimeError(f"Failed to upload image binary to LinkedIn (Status {upload_res.status_code})")
 
-        logger.info(f"✅ Image binary successfully uploaded to LinkedIn: {asset_urn}")
+        logger.info(f"[OK] Image binary successfully uploaded to LinkedIn: {asset_urn}")
         return asset_urn
 
     def _publish_ugc_post(self, text: str, asset_urn: Optional[str] = None) -> str:
@@ -170,7 +170,7 @@ class LinkedInClient:
         if res.status_code in [200, 201]:
             result = res.json()
             post_urn = result.get("id") or "published_success"
-            logger.info(f"🎉 LinkedIn Post Published Successfully! Post URN: {post_urn}")
+            logger.info(f" LinkedIn Post Published Successfully! Post URN: {post_urn}")
             return str(post_urn)
 
         err_data = res.json() if "application/json" in res.headers.get("Content-Type", "") else res.text

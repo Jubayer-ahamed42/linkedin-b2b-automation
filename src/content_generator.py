@@ -61,36 +61,36 @@ Your objective: Write an exceptional, high-converting, deeply human LinkedIn pos
 【PREVIOUSLY COVERED ANGLES (DO NOT REPEAT TOPICS)】:
 {recent_history_summary if recent_history_summary else "No previous posts recorded. Present a fresh, compelling, numbers-backed case study."}
 
-【🚨 STRICT 2026 LINKEDIN HUMANIZER & VOICE GUIDELINES (sergebulaev/linkedin-skills standard)】:
-1. 🚫 ZERO ROBOTIC CLICHÉS & AI TELLS (Penalized by LinkedIn Algorithm & Ignored by Founders):
+【[ALERT] STRICT 2026 LINKEDIN HUMANIZER & VOICE GUIDELINES (sergebulaev/linkedin-skills standard)】:
+1. ZERO ROBOTIC CLICHÉS & AI TELLS (Penalized by LinkedIn Algorithm & Ignored by Founders):
    - ABSOLUTELY FORBIDDEN: "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note that", "Let that sink in", "Unleash", "Testament to".
    - AVOID AI BUZZWORD DENSITY: Do not pack paragraphs with words like crucial, significant, robust, leverage, streamline, holistic, multifaceted, elevate, empower, seamless, ecosystem. Replace with concrete facts, tangible numbers, and direct actions.
    - Speak in the calm, confident, battle-tested voice of a real practitioner who writes webhooks, connects APIs, fixes database bottlenecks, and protects client margins every day.
 
-2. 🎯 SCROLL-STOPPING 2026 HOOK (Lines 1 & 2):
+2. [Target] SCROLL-STOPPING 2026 HOOK (Lines 1 & 2):
    - Never open with a generic question ("Are you struggling with X?", "Did you know that...?").
    - Open with an Odd-Precision Operational Opener (F7), Controlled A/B Comparison (F17), or Platform/Operational Risk (F1):
      * e.g., "Last month, a single autonomous workflow handled 1,840 incoming client inquiries with an average reply time of 3.4 seconds."
      * e.g., "Agency A: 4 full-time staff spending 16 hours a week copy-pasting lead data into spreadsheets. Agency B: 1 operator + a 5-step webhook sync that runs in 2 seconds."
      * e.g., "Your sales reps aren't burning out from high deal volume. They are burning out from typing the exact same 12 FAQ answers 150 times a day."
 
-3. 🚫 ELIMINATE REVEAL BRIDGES & ARTIFICIAL RHYTHM:
+3. ELIMINATE REVEAL BRIDGES & ARTIFICIAL RHYTHM:
    - No formulaic transition questions ("The result?", "The outcome?", "Plot twist:", "Here's why:", "Why does this matter?"). State facts directly.
    - No forced mechanical staccato stacks ("No fluff. No stress. Just scale.").
    - No stacked triads on every point (vary sentence length naturally).
 
-4. 📱 MOBILE-OPTIMIZED READABILITY:
+4. [Mobile] MOBILE-OPTIMIZED READABILITY:
    - Max 1 to 2 sentences per paragraph, separated by blank lines.
-   - Clear, clean bullet points (• or 🔹) for ease of skimming.
+   - Clear, clean bullet points (• or -) for ease of skimming.
    - Ground claims with concrete numbers: hours saved per week, response time drop, dollars recovered, margin expansion.
 
-5. 🤝 HIGH-CONVERTING, LOW-FRICTION CALL TO ACTION (CTA):
+5. [Partner] HIGH-CONVERTING, LOW-FRICTION CALL TO ACTION (CTA):
    - No fake engagement bait ("Comment 'AI' below").
    - Offer a direct, respectful, founder-to-founder invitation:
      "If you want to identify where manual data entry and repetitive tasks are creating bottlenecks in your business, message me directly on WhatsApp for a complimentary 15-minute workflow audit:
-     👉 {OFFICIAL_WHATSAPP_LINK}"
+     -> {OFFICIAL_WHATSAPP_LINK}"
 
-6. 🏷️ STRICT MAXIMUM 2 HASHTAGS: Include strictly maximum 1 to 2 ultra-relevant hashtags at the very bottom (e.g., {hashtags}). UNDER NO CIRCUMSTANCES include more than 2 hashtags. Never place hashtags inside body sentences.
+6. [Tag] STRICT MAXIMUM 2 HASHTAGS: Include strictly maximum 1 to 2 ultra-relevant hashtags at the very bottom (e.g., {hashtags}). UNDER NO CIRCUMSTANCES include more than 2 hashtags. Never place hashtags inside body sentences.
 
 【REQUIRED OUTPUT FORMAT】:
 Output strictly a valid JSON object with NO surrounding markdown commentary:
@@ -206,7 +206,7 @@ Output strictly a valid JSON object with NO surrounding markdown commentary:
         solution = theme_data["solution"]
         hashtags = " ".join(theme_data["hashtags"][:2])
 
-        title = f"⚡ {theme_name}: Eliminating Operational Bottlenecks"
+        title = f"[Fast] {theme_name}: Eliminating Operational Bottlenecks"
         content = f"""{title}
 
 Most growing businesses bleed margins to an avoidable operational leak:
@@ -223,7 +223,7 @@ Here is the exact architecture we deploy:
 
 Want to audit your current business workflows and see where automation can save 20+ hours a week?
 Send me a direct message on WhatsApp for a complimentary 15-minute systems audit:
-👉 {OFFICIAL_WHATSAPP_LINK}
+-> {OFFICIAL_WHATSAPP_LINK}
 
 {hashtags}"""
 

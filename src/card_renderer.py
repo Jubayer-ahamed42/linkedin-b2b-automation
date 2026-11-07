@@ -89,7 +89,7 @@ class LinkedInCardRenderer:
 
         # 5. Center Hero Badge
         draw.rounded_rectangle([(width//2 - 170, 240), (width//2 + 170, 295)], radius=18, fill=(15, 23, 42), outline=(14, 165, 233), width=2)
-        draw.text((width//2, 267), "⚡ AI AUTOMATION CASE STUDY", fill=(56, 189, 248), anchor="mm", font=badge_font)
+        draw.text((width//2, 267), "[Fast] AI AUTOMATION CASE STUDY", fill=(56, 189, 248), anchor="mm", font=badge_font)
 
         # 6. Center Hero Headline (Formatted into max 3 lines with drop shadow)
         clean_headline = re.sub(r"^[\U00010000-\U0010ffff\u2600-\u27bf\s]+", "", headline).strip()
@@ -119,12 +119,12 @@ class LinkedInCardRenderer:
         # 7. Metric / ROI Ribbon (Bottom Center)
         metric_box = [(margin + 60, height - 260), (width - margin - 60, height - 175)]
         draw.rounded_rectangle(metric_box, radius=24, fill=(15, 23, 42), outline=(16, 185, 129), width=2)
-        draw.text((width//2, height - 218), f"🎯  {metric}  🎯", fill=(52, 211, 153), anchor="mm", font=metric_font)
+        draw.text((width//2, height - 218), f"[Target] {metric} [Target]", fill=(52, 211, 153), anchor="mm", font=metric_font)
 
         # 8. Bottom Footer (Official Contact & Authority)
         draw.text((width//2, height - margin - 45), "Be Smart With AI • Free Systems Audit: wa.me/8801610594042", fill=(148, 163, 184), anchor="mm", font=brand_font)
 
         # Save JPEG
         img.save(target_path, "JPEG", quality=95)
-        logger.info(f"✅ B2B LinkedIn Infographic Card successfully rendered: {target_path}")
+        logger.info(f"[OK] B2B LinkedIn Infographic Card successfully rendered: {target_path}")
         return target_path

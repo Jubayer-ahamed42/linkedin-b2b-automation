@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 > nul
 echo ========================================================
-echo  🔑 LinkedIn 1-Click OAuth Setup Assistant
+echo [Key] LinkedIn 1-Click OAuth Setup Assistant
 echo ========================================================
 echo.
 if exist ".venv\Scripts\python.exe" (

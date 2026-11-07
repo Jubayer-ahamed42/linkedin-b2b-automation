@@ -39,8 +39,8 @@ logger = logging.getLogger("LINKEDIN_POSTER")
 def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = False, force: bool = False) -> None:
     now_bst = get_current_bst_time()
     logger.info("=" * 65)
-    logger.info(f"💼 শুরু হচ্ছে LinkedIn B2B Client-Acquisition অটোমেশন বট ({AGENCY_NAME})")
-    logger.info(f"⏰ বর্তমান সময় (বাংলাদেশ): {now_bst.strftime('%Y-%m-%d %I:%M:%S %p')} BST")
+    logger.info(f" শুরু হচ্ছে LinkedIn B2B Client-Acquisition অটোমেশন বট ({AGENCY_NAME})")
+    logger.info(f"[Alarm] বর্তমান সময় (বাংলাদেশ): {now_bst.strftime('%Y-%m-%d %I:%M:%S %p')} BST")
 
     # 1. Select Theme
     theme_data = None
@@ -52,8 +52,8 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
     if not theme_data:
         theme_data = determine_today_theme()
 
-    logger.info(f"🎯 আজকের স্ট্র্যাটেজিক থিম: {theme_data['name']}")
-    logger.info(f"📌 টার্গেট অডিয়েন্স: {theme_data['target_audience']}")
+    logger.info(f"[Target] আজকের স্ট্র্যাটেজিক থিম: {theme_data['name']}")
+    logger.info(f"[Pin] টার্গেট অডিয়েন্স: {theme_data['target_audience']}")
     logger.info("=" * 65)
 
     # 2. History Check & 1-Post-Per-Day Guard
@@ -61,16 +61,16 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
     if not dry_run and not force:
         already_posted, last_time = history_mgr.is_already_posted_today()
         if already_posted:
-            logger.warning(f"⚠️ আজকের দিনে ইতিমধ্যে একটি পোস্ট করা হয়েছে ({last_time})।")
-            logger.info("🛡️ লিঙ্কডইন অ্যালগরিদম ক্যানিবালাইজেশন রোধে আজকের দ্বিতীয় রানটি স্কিপ করা হলো।")
-            logger.info("💡 জরুরি প্রয়োজনে পুনরায় ফোর্স করতে '--force' ফ্ল্যাগ ব্যবহার করুন।")
+            logger.warning(f"[!] আজকের দিনে ইতিমধ্যে একটি পোস্ট করা হয়েছে ({last_time})।")
+            logger.info("[Shield] লিঙ্কডইন অ্যালগরিদম ক্যানিবালাইজেশন রোধে আজকের দ্বিতীয় রানটি স্কিপ করা হলো।")
+            logger.info("[Tip] জরুরি প্রয়োজনে পুনরায় ফোর্স করতে '--force' ফ্ল্যাগ ব্যবহার করুন।")
             return
 
     recent_summary = history_mgr.get_recent_summary(limit=15)
-    logger.info("📚 পূর্ববর্তী পোস্টের ইতিহাস লোড হয়েছে। ডুপ্লিকেট কনটেন্ট ফিল্টার সক্রিয়।")
+    logger.info("[Docs] পূর্ববর্তী পোস্টের ইতিহাস লোড হয়েছে। ডুপ্লিকেট কনটেন্ট ফিল্টার সক্রিয়।")
 
     # 3. Content Generation (Google Gemini + sergebulaev/linkedin-skills Humanizer)
-    logger.info("✍️ ওপেন-সোর্স linkedin-skills হিউম্যানাইজার রুলস দিয়ে B2B পোস্ট তৈরি হচ্ছে...")
+    logger.info("[Write] ওপেন-সোর্স linkedin-skills হিউম্যানাইজার রুলস দিয়ে B2B পোস্ট তৈরি হচ্ছে...")
     content_gen = LinkedInContentGenerator(api_key=GEMINI_API_KEY)
     post_data = content_gen.generate_post(theme_data=theme_data, recent_history_summary=recent_summary)
 
@@ -81,19 +81,19 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
     content = post_data.get("content", "")
     topic_summary = post_data.get("topic_summary", "")
 
-    logger.info(f"✅ পোস্ট তৈরি সম্পন্ন: '{headline}'")
+    logger.info(f"[OK] পোস্ট তৈরি সম্পন্ন: '{headline}'")
 
     # 4. Render Infographic Card
     card_path = None
     if not skip_image:
-        logger.info("🎨 এক্সিকিউটিভ B2B ইনফোগ্রাফিক কার্ড রেন্ডার করা হচ্ছে...")
+        logger.info("[Design] এক্সিকিউটিভ B2B ইনফোগ্রাফিক কার্ড রেন্ডার করা হচ্ছে...")
         card_renderer = LinkedInCardRenderer()
         card_path = card_renderer.render_b2b_card(
             headline=card_title,
             category=card_badge,
             metric=card_metric
         )
-        logger.info(f"📸 চূড়ান্ত ইনফোগ্রাফিক প্রস্তুত: {card_path}")
+        logger.info(f"[Photo] চূড়ান্ত ইনফোগ্রাফিক প্রস্তুত: {card_path}")
 
     # 5. Display Preview
     print("\n" + "=" * 25 + " [LINKEDIN B2B POST PREVIEW] " + "=" * 25)
@@ -102,7 +102,7 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
 
     # 6. Dry Run Check
     if dry_run:
-        logger.info("🧪 [DRY-RUN মোড সক্রিয়] লিঙ্কডইনে কোনো পোস্ট পাঠানো হয়নি। প্রিভিউ ও ইমেজ সফলভাবে জেনারেট হয়েছে।")
+        logger.info("[Test] [DRY-RUN মোড সক্রিয়] লিঙ্কডইনে কোনো পোস্ট পাঠানো হয়নি। প্রিভিউ ও ইমেজ সফলভাবে জেনারেট হয়েছে।")
         return
 
     # 7. Publish to LinkedIn (via Buffer Official Partner or Direct REST API)
@@ -117,18 +117,18 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
         if now_bst < target_post_time_bst.replace(minute=25):
             due_at = target_post_time_bst.astimezone(pytz.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
             post_mode = "customScheduled"
-            logger.info(f"⏰ স্মার্ট প্রি-শিডিউল মোড সক্রিয়: পোস্টটি বাফারে আজ সকাল ০৯:৩০ BST ({due_at})-এর জন্য শিডিউল করা হচ্ছে...")
+            logger.info(f"[Alarm] স্মার্ট প্রি-শিডিউল মোড সক্রিয়: পোস্টটি বাফারে আজ সকাল ০৯:৩০ BST ({due_at})-এর জন্য শিডিউল করা হচ্ছে...")
         else:
             due_at = None
             post_mode = "shareNow"
-            logger.info("⚡ ইনস্ট্যান্ট পাবলিশ মোড সক্রিয়: পোস্টটি এখনই বাফারের মাধ্যমে সরাসরি লাইভ করা হচ্ছে...")
+            logger.info("[Fast] ইনস্ট্যান্ট পাবলিশ মোড সক্রিয়: পোস্টটি এখনই বাফারের মাধ্যমে সরাসরি লাইভ করা হচ্ছে...")
 
         try:
             post_id = buf_client.publish_post(text=content, mode=post_mode, due_at=due_at)
             if post_mode == "customScheduled":
-                logger.info(f"🎉 পোস্ট সফলভাবে বাফারে শিডিউল হয়েছে! নির্ধারিত ০৯:৩০ BST-তে বাফার সরাসরি লিঙ্কডইনে পাবলিশ করবে। Post ID: {post_id}")
+                logger.info(f" পোস্ট সফলভাবে বাফারে শিডিউল হয়েছে! নির্ধারিত ০৯:৩০ BST-তে বাফার সরাসরি লিঙ্কডইনে পাবলিশ করবে। Post ID: {post_id}")
             else:
-                logger.info(f"🎉 পোস্ট সফলভাবে লিঙ্কডইনে প্রকাশিত হয়েছে! Buffer Post ID: {post_id}")
+                logger.info(f" পোস্ট সফলভাবে লিঙ্কডইনে প্রকাশিত হয়েছে! Buffer Post ID: {post_id}")
 
             # Record to History
             history_mgr.record_post(
@@ -138,16 +138,16 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
                 post_urn=str(post_id),
                 card_path=str(card_path) if card_path else ""
             )
-            logger.info("💾 হিস্ট্রি আপডেট সম্পন্ন। পরবর্তী শিডিউলে নতুন বিষয় ও কেস স্টাডি নিয়ে পোস্ট হবে।")
+            logger.info("[Save] হিস্ট্রি আপডেট সম্পন্ন। পরবর্তী শিডিউলে নতুন বিষয় ও কেস স্টাডি নিয়ে পোস্ট হবে।")
         except Exception as e:
-            logger.error(f"❌ বাফারের মাধ্যমে পোস্ট সম্পন্ন করতে ব্যর্থ: {e}")
+            logger.error(f"[X] বাফারের মাধ্যমে পোস্ট সম্পন্ন করতে ব্যর্থ: {e}")
             sys.exit(1)
     else:
-        logger.info("🚀 LinkedIn Official REST API দিয়ে প্রোফাইলে পোস্ট পাঠানো হচ্ছে...")
+        logger.info("[Launch] LinkedIn Official REST API দিয়ে প্রোফাইলে পোস্ট পাঠানো হচ্ছে...")
         li_client = LinkedInClient(access_token=LINKEDIN_ACCESS_TOKEN, person_urn=LINKEDIN_PERSON_URN)
         try:
             post_urn = li_client.publish_post(text=content, image_path=card_path)
-            logger.info(f"🎉 পোস্ট সফলভাবে লিঙ্কডইনে প্রকাশিত হয়েছে! Post URN: {post_urn}")
+            logger.info(f" পোস্ট সফলভাবে লিঙ্কডইনে প্রকাশিত হয়েছে! Post URN: {post_urn}")
 
             # Record to History
             history_mgr.record_post(
@@ -157,47 +157,47 @@ def run_poster(theme_id: str = None, dry_run: bool = False, skip_image: bool = F
                 post_urn=str(post_urn),
                 card_path=str(card_path) if card_path else ""
             )
-            logger.info("💾 হিস্ট্রি আপডেট সম্পন্ন। আগামীকাল নতুন বিষয় ও কেস স্টাডি নিয়ে পোস্ট হবে।")
+            logger.info("[Save] হিস্ট্রি আপডেট সম্পন্ন। আগামীকাল নতুন বিষয় ও কেস স্টাডি নিয়ে পোস্ট হবে।")
         except Exception as e:
-            logger.error(f"❌ লিঙ্কডইনে পোস্ট প্রকাশ করতে ব্যর্থ: {e}")
+            logger.error(f"[X] লিঙ্কডইনে পোস্ট প্রকাশ করতে ব্যর্থ: {e}")
             sys.exit(1)
 
 def verify_credentials() -> None:
     """Verifies API credentials for Gemini and Buffer/LinkedIn."""
-    logger.info("🔍 ক্রেডেনশিয়াল ভেরিফিকেশন শুরু হচ্ছে...")
+    logger.info("[Search] ক্রেডেনশিয়াল ভেরিফিকেশন শুরু হচ্ছে...")
     
     print("\n[১] Google Gemini API চেক:")
     if not GEMINI_API_KEY:
-        print("  ❌ GEMINI_API_KEY পাওয়া যায়নি! (.env ফাইলে যোগ করুন)")
+        print(" [X] GEMINI_API_KEY পাওয়া যায়নি! (.env ফাইলে যোগ করুন)")
     else:
-        print("  🔑 GEMINI_API_KEY সক্রিয়। টেস্ট কল করা হচ্ছে...")
+        print(" [Key] GEMINI_API_KEY সক্রিয়। টেস্ট কল করা হচ্ছে...")
         try:
             gen = LinkedInContentGenerator(api_key=GEMINI_API_KEY)
             theme = determine_today_theme()
             res = gen.generate_post(theme_data=theme, recent_history_summary="")
-            print(f"  ✅ Gemini API সফলভাবে সংযুক্ত! শিরোনাম: {res.get('headline')}")
+            print(f" [OK] Gemini API সফলভাবে সংযুক্ত! শিরোনাম: {res.get('headline')}")
         except Exception as e:
-            print(f"  ❌ Gemini API ত্রুটি: {e}")
+            print(f" [X] Gemini API ত্রুটি: {e}")
 
     print("\n[২] LinkedIn (Buffer Partner) চেক:")
     if BUFFER_API_KEY and BUFFER_CHANNEL_ID:
-        print("  🔑 BUFFER_API_KEY সক্রিয়। বাফার চ্যানেল পরীক্ষা করা হচ্ছে...")
+        print(" [Key] BUFFER_API_KEY সক্রিয়। বাফার চ্যানেল পরীক্ষা করা হচ্ছে...")
         try:
             buf = BufferClient(api_key=BUFFER_API_KEY, channel_id=BUFFER_CHANNEL_ID)
             ch = buf.verify_connection()
-            print(f"  ✅ বাফারের মাধ্যমে লিঙ্কডইন প্রোফাইল সফলভাবে সংযুক্ত: {ch.get('name')} ({ch.get('service')})")
+            print(f" [OK] বাফারের মাধ্যমে লিঙ্কডইন প্রোফাইল সফলভাবে সংযুক্ত: {ch.get('name')} ({ch.get('service')})")
         except Exception as e:
-            print(f"  ❌ বাফার সংযোগ ত্রুটি: {e}")
+            print(f" [X] বাফার সংযোগ ত্রুটি: {e}")
     elif LINKEDIN_ACCESS_TOKEN:
-        print("  🔑 LINKEDIN_ACCESS_TOKEN পাওয়া গেছে। সংযোগ পরীক্ষা করা হচ্ছে...")
+        print(" [Key] LINKEDIN_ACCESS_TOKEN পাওয়া গেছে। সংযোগ পরীক্ষা করা হচ্ছে...")
         try:
             client = LinkedInClient(access_token=LINKEDIN_ACCESS_TOKEN, person_urn=LINKEDIN_PERSON_URN)
             info = client.verify_credentials()
-            print(f"  ✅ লিঙ্কডইন অ্যাকাউন্ট সংযুক্ত: {info.get('name')} ({info.get('person_urn')})")
+            print(f" [OK] লিঙ্কডইন অ্যাকাউন্ট সংযুক্ত: {info.get('name')} ({info.get('person_urn')})")
         except Exception as e:
-            print(f"  ❌ লিঙ্কডইন সংযোগ ত্রুটি: {e}")
+            print(f" [X] লিঙ্কডইন সংযোগ ত্রুটি: {e}")
     else:
-        print("  ⚠️ BUFFER_API_KEY অথবা LINKEDIN_ACCESS_TOKEN এখনো সেট করা হয়নি।")
+        print(" [!] BUFFER_API_KEY অথবা LINKEDIN_ACCESS_TOKEN এখনো সেট করা হয়নি।")
     print("\n")
 
 def main():

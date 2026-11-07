@@ -14,7 +14,7 @@ Instead of deleting single common words, evaluate paragraphs for clusters of ove
 - **Durable 2026 AI markers**: *significant, crucial, notably, particularly, comprehensive, insights, robust, leverage, foster, landscape, nuanced, multifaceted, holistic, streamline, elevate, empower, seamless, ecosystem*.
 - **Density Rule**: 1 marker in a paragraph is natural. **3 or more markers in a paragraph is an AI signature** — rewrite the paragraph with concrete numbers, real actions, or direct facts.
 - **Forbidden Corporate Jargon & Clichés**:
-  - 🚫 "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note", "Let that sink in".
+  - "In today's fast-paced digital world", "Delve into", "Revolutionize", "Tapestry", "Game changer", "Furthermore", "It is important to note", "Let that sink in".
 
 ### 2. Punctuation & Formatting Calibration
 - **Em Dashes (—)**: Cap at maximum ~1 per 100 words (floor 1, max 2 per post). Replace excess with comma, colon, or natural rewrite. Never split into a staccato period.
@@ -22,10 +22,10 @@ Instead of deleting single common words, evaluate paragraphs for clusters of ove
 - **Mobile-Friendly Layout**: 1 to 2 lines per paragraph with clean blank lines for high dwell time on mobile screens.
 
 ### 3. Structural Tells to Eliminate (Pass 2 - Rhythm)
-- 🚫 **Reveal Bridges**: Eliminate formulaic transition questions ("The result?", "The outcome?", "Plot twist:", "Here's what happens:"). State the fact directly.
-- 🚫 **Negative Parallelism**: Avoid repetitive "Stop doing X, start doing Y" or "It's not X, it's Y" unless grounded in a specific, dated case study.
-- 🚫 **Forced Staccato Stacks**: Avoid mechanical "Short. Punchy. Done." or "No X. No Y. Just Z." lists.
-- 🚫 **Stacked Triads**: Limit to at most one natural triple per post; avoid stacking 3 items in every single point.
+- **Reveal Bridges**: Eliminate formulaic transition questions ("The result?", "The outcome?", "Plot twist:", "Here's what happens:"). State the fact directly.
+- **Negative Parallelism**: Avoid repetitive "Stop doing X, start doing Y" or "It's not X, it's Y" unless grounded in a specific, dated case study.
+- **Forced Staccato Stacks**: Avoid mechanical "Short. Punchy. Done." or "No X. No Y. Just Z." lists.
+- **Stacked Triads**: Limit to at most one natural triple per post; avoid stacking 3 items in every single point.
 
 ### 4. Authentic Business Psychology (Pass 3)
 - Focus on founder/business pain points: Lead flow, closing rate, overhead cost, response time, SOP bottlenecks, ROI.
